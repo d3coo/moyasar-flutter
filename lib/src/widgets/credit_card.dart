@@ -168,8 +168,10 @@ class _CreditCardState extends State<CreditCard> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: SizedBox(
-              child: ElevatedButton(
+              child: FilledButton(
                 style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0))),
                   minimumSize:
                       const MaterialStatePropertyAll<Size>(Size.fromHeight(55)),
                   backgroundColor: MaterialStatePropertyAll<Color>(blueColor),
@@ -180,8 +182,14 @@ class _CreditCardState extends State<CreditCard> {
                         color: Colors.white,
                         strokeWidth: 2,
                       )
-                    : Text(showAmount(widget.config.amount, widget.locale),
-                        style: const TextStyle(color: Colors.white)),
+                    : Text(
+                        showAmount(widget.config.amount, widget.locale),
+                        style: const TextStyle(
+                            fontFamily: 'Almarai',
+                            color: Color(0xFF14181B),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400),
+                      ),
               ),
             ),
           ),
@@ -282,7 +290,7 @@ InputDecoration buildInputDecoration(
 
 void closeKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
 
-BorderRadius defaultBorderRadius = const BorderRadius.all(Radius.circular(8));
+BorderRadius defaultBorderRadius = const BorderRadius.all(Radius.circular(15));
 
 OutlineInputBorder defaultEnabledBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.grey[400]!),
@@ -296,4 +304,5 @@ OutlineInputBorder defaultErrorBorder = OutlineInputBorder(
     borderSide: const BorderSide(color: Colors.red),
     borderRadius: defaultBorderRadius);
 
-Color blueColor = Colors.blue[700]!;
+Color blueColor = const Color(0xFFFFCD00);
+Color maincolor = const Color(0xFF00AFAA);
