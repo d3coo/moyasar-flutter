@@ -256,6 +256,7 @@ class CardFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+          textDirection: TextDirection.ltr,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           decoration: inputDecoration,
