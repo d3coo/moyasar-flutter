@@ -5,6 +5,10 @@ import 'package:moyasar/src/utils/card_utils.dart';
 import 'package:moyasar/src/utils/input_formatters.dart';
 import 'package:moyasar/src/widgets/network_icons.dart';
 import 'package:moyasar/src/widgets/three_d_s_webview.dart';
+import 'dart:ui' as UI;
+
+UI.TextDirection directionLTR = UI.TextDirection.ltr;
+UI.TextDirection directionRTL = UI.TextDirection.rtl;
 
 /// The widget that shows the Credit Card form and manages the 3DS step.
 class CreditCard extends StatefulWidget {
@@ -110,91 +114,94 @@ class _CreditCardState extends State<CreditCard> {
     return Form(
       autovalidateMode: _autoValidateMode,
       key: _formKey,
-      child: Column(
-        children: [
-          CardFormField(
-              inputDecoration: buildInputDecoration(
-                hintText: widget.locale.nameOnCard,
-              ),
-              keyboardType: TextInputType.text,
-              validator: (String? input) =>
-                  CardUtils.validateName(input, widget.locale),
-              onSaved: (value) => _cardData.name = value ?? '',
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[a-zA-Z. ]')),
-              ]),
-          CardFormField(
-            inputDecoration: buildInputDecoration(
-                hintText: widget.locale.cardNumber, addNetworkIcons: true),
-            validator: (String? input) =>
-                CardUtils.validateCardNum(input, widget.locale),
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(16),
-              CardNumberInputFormatter(),
-            ],
-            onSaved: (value) =>
-                _cardData.number = CardUtils.getCleanedNumber(value!),
-          ),
-          CardFormField(
-            inputDecoration: buildInputDecoration(
-              hintText: '${widget.locale.expiry} (MM / YY)',
-            ),
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(4),
-              CardMonthInputFormatter(),
-            ],
-            validator: (String? input) =>
-                CardUtils.validateDate(input, widget.locale),
-            onSaved: (value) {
-              List<String> expireDate = CardUtils.getExpiryDate(value!);
-              _cardData.month = expireDate.first;
-              _cardData.year = expireDate[1];
-            },
-          ),
-          CardFormField(
-            inputDecoration: buildInputDecoration(
-              hintText: widget.locale.cvc,
-            ),
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(4),
-            ],
-            validator: (String? input) =>
-                CardUtils.validateCVC(input, widget.locale),
-            onSaved: (value) => _cardData.cvc = value ?? '',
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: SizedBox(
-              child: FilledButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0))),
-                  minimumSize:
-                      const MaterialStatePropertyAll<Size>(Size.fromHeight(55)),
-                  backgroundColor: MaterialStatePropertyAll<Color>(blueColor),
+      child: Directionality(
+        textDirection: directionLTR,
+        child: Column(
+          children: [
+            CardFormField(
+                inputDecoration: buildInputDecoration(
+                  hintText: widget.locale.nameOnCard,
                 ),
-                onPressed: _isSubmitting ? () {} : _saveForm,
-                child: _isSubmitting
-                    ? const CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 2,
-                      )
-                    : Text(
-                        showAmount(widget.config.amount, widget.locale),
-                        style: const TextStyle(
-                            fontFamily: 'Almarai',
-                            color: Color(0xFF14181B),
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400),
-                      ),
+                keyboardType: TextInputType.text,
+                validator: (String? input) =>
+                    CardUtils.validateName(input, widget.locale),
+                onSaved: (value) => _cardData.name = value ?? '',
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z. ]')),
+                ]),
+            CardFormField(
+              inputDecoration: buildInputDecoration(
+                  hintText: widget.locale.cardNumber, addNetworkIcons: true),
+              validator: (String? input) =>
+                  CardUtils.validateCardNum(input, widget.locale),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(16),
+                CardNumberInputFormatter(),
+              ],
+              onSaved: (value) =>
+                  _cardData.number = CardUtils.getCleanedNumber(value!),
+            ),
+            CardFormField(
+              inputDecoration: buildInputDecoration(
+                hintText: '${widget.locale.expiry} (MM / YY)',
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(4),
+                CardMonthInputFormatter(),
+              ],
+              validator: (String? input) =>
+                  CardUtils.validateDate(input, widget.locale),
+              onSaved: (value) {
+                List<String> expireDate = CardUtils.getExpiryDate(value!);
+                _cardData.month = expireDate.first;
+                _cardData.year = expireDate[1];
+              },
+            ),
+            CardFormField(
+              inputDecoration: buildInputDecoration(
+                hintText: widget.locale.cvc,
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(4),
+              ],
+              validator: (String? input) =>
+                  CardUtils.validateCVC(input, widget.locale),
+              onSaved: (value) => _cardData.cvc = value ?? '',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: SizedBox(
+                child: FilledButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0))),
+                    minimumSize: const MaterialStatePropertyAll<Size>(
+                        Size.fromHeight(55)),
+                    backgroundColor: MaterialStatePropertyAll<Color>(blueColor),
+                  ),
+                  onPressed: _isSubmitting ? () {} : _saveForm,
+                  child: _isSubmitting
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        )
+                      : Text(
+                          showAmount(widget.config.amount, widget.locale),
+                          style: const TextStyle(
+                              fontFamily: 'Almarai',
+                              color: Color(0xFF14181B),
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                ),
               ),
             ),
-          ),
-          SaveCardNotice(tokenizeCard: _tokenizeCard, locale: widget.locale)
-        ],
+            SaveCardNotice(tokenizeCard: _tokenizeCard, locale: widget.locale)
+          ],
+        ),
       ),
     );
   }
@@ -256,7 +263,6 @@ class CardFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
-          textDirection: TextDirection.ltr,
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           decoration: inputDecoration,
