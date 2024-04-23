@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - moyasar (0.0.1):
+    - Flutter
   - pay_ios (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
@@ -7,22 +9,26 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - moyasar (from `.symlinks/plugins/moyasar/ios`)
   - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  moyasar:
+    :path: ".symlinks/plugins/moyasar/ios"
   pay_ios:
     :path: ".symlinks/plugins/pay_ios/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  moyasar: ef85946ede43c27c8358c570e90ac66aebf8f0dc
   pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
-  webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
+  webview_flutter_wkwebview: be0f0d33777f1bfd0c9fdcb594786704dbf65f36
 
-PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2
