@@ -10,7 +10,7 @@ class ApplePay extends StatefulWidget {
       {super.key,
       required this.config,
       required this.onPaymentResult,
-      this.buttonType = ApplePayButtonType.inStore,
+      this.buttonType = ApplePayButtonType.plain,
       this.buttonStyle = ApplePayButtonStyle.black})
       : assert(config.applePay != null,
             "Please add applePayConfig when instantiating the paymentConfig.");
@@ -116,10 +116,11 @@ class _ApplePayState extends State<ApplePay> {
               )
             ],
             type: widget.buttonType,
+            cornerRadius: 16.0,
             style: widget.buttonStyle,
             onPaymentResult: onApplePayResult,
             width: MediaQuery.of(context).size.width,
-            height: 40,
+            height: 60,
             onError: (_) {
               onApplePayError();
             },
@@ -130,7 +131,7 @@ class _ApplePayState extends State<ApplePay> {
         : ConstrainedBox(
             constraints: BoxConstraints.tightFor(
               width: MediaQuery.of(context).size.width,
-              height: 40,
+              height: 60,
             ),
             child: UiKitView(
               viewType: applePayButtonViewNativeId,
