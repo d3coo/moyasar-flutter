@@ -1,3 +1,31 @@
+## 2.0.13
+
+- [Flutter] Upgrade to latest versions of Flutter tooling; Flutter to `3.24.0`, Dart to `3.5.0`, DevTools to `2.37.2`.
+- [Apple Pay] Expose `supportedCountries` config with default of `["SA"]` to accept payments from set countries.
+
+## 2.0.12
+
+- [Flutter] Upgrade to latest versions of Flutter tooling; Flutter to `3.22.3`, Dart to `3.4.4`, DevTools to `2.34.3`.
+- [Moyasar] Support any primitive JSON type in the payment metadata instead of String only.
+- [Moyasar] Upgrade `http` dependency to `1.2.2`.
+ 
+## 2.0.11
+
+The main theme of this release is to support latest versions of the Flutter tooling and the utilized dependencies.
+
+- [Flutter] Upgrade to latest versions of Flutter tooling; Flutter to `3.22.2`, Dart to `3.4.3`, DevTools to `2.34.3`.
+- [Credit Card] Upgrade `webview_flutter` dependency to `4.8.0`.
+- [Credit Card] Replace deprecated `MaterialStatePropertyAll` to the new `WidgetStatePropertyAll`.
+
+## 2.0.10
+
+- [Credit Card] Show the correct currency on the Pay widget.
+- [Credit Card] Make the hintText in RTL direction for each TextFormField when the locale is Arabic.
+
+## 2.0.9
+
+- [iOS] Add Privacy Manifest file.
+
 ## 2.0.8
 
 The main theme of this release is to support latest versions of the Flutter tooling and the utilized dependencies.
